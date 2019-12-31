@@ -1,8 +1,5 @@
 # * -- utf-8 -- *
 
-# Author: Tang
-
-
 import turtle as t
 
 t.speed(10)
