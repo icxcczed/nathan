@@ -1,0 +1,4 @@
+<!--opages/map/map.wxml-->
+<map latitude="40.060148" longitude="116.343219" scale="18" />
+<button bindtap="buttonTap">查看我的位置</button>
+<map latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" bindmarkertap="markertap" />

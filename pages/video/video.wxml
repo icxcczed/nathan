@@ -1,0 +1,24 @@
+<!--pages/video/video.wxml-->
+<video id="myVideo" src="{{src}}" danmu-list="{{danmuList}}"
+enable-danmu danmu-btn controls></video>
+<input bindblur="bindInputBlur" />
+<button bindtap="bindSendDanmu">发送弹幕</button>
+<button bindtap="bindButtonTap">获取视频</button>
+<txv-video vid="y0371c5p9cc" playerid="txv1"></txv-video>
+<view class="video-list" wx:for="{{movieList}}" wx:key="user">
+  <view class="video-title">标题：{{item.title}}</view>
+  <view class="video-time">时间：{{formmatData(item.create_time)}}</view>
+  <video src="{{item.src}}" objectFit="fill"></video>
+</view>
+<wxs module="formatData">
+  module.exports = function(timestamp){
+    var date = getData(timestamp) 
+      var y =data.getFullyear()
+      var m =date.getMonth() + 1
+      var d =date.getDate()
+      var h =date.getHours()
+      var i =date.getMinutes()
+      var s=date.getSeconds()
+      return y+'-'+m+'-'+d+' '+h+':'+i+':'+s
+  }
+</wxs>
