@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 headers = {
     'user-agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
-    'referer':'https://www.pixiv.net/ranking.php?mode=daily&content=illust',
+    'referer':'https://www.pixiv.net/ranking.php?mode=daily&content=illust'
 }
 #保存路径
 path = 'I:/'
