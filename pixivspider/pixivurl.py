@@ -7,3 +7,4 @@ headers={'referer':'https://www.pixiv.net'}
 url='https://i.pximg.net/img-master/img/2020/10/29/00/21/14/85300778_p1_master1200.jpg'
 myfile = requests.get(url,headers=headers,verify=False)
 open('G:/wallpaper/85300778p1.jpg','wb').write(myfile.content)
+print('Image saved successfully')
