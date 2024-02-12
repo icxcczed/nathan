@@ -1,0 +1,38 @@
+{
+    // 当前环境定义全局变量
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    // 扩展 (eslint)
+    // eslint:recommended 自带的推荐扩展 eslint认为是最佳的检测规范
+    //prettier eslint-config-prettier
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    //js的语言选项
+    "parserOptions": {
+        //版本
+        "ecmaVersion": "latest",
+        //类型
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint","prettier"
+    ],
+    // 检测规则 (默认eslint自带的规则)
+    "rules": {
+        // 检测规则，当前的插件从ESlint里面运行Prettier
+        "prettier/prettier":2,
+        "semi":"error",
+        // off 或者0 表示关闭报错提示
+        // on 或者1表示开启报错提示
+        // 0 =off ,1=warn 2=error
+        "no-unused-vars":2,
+        //报错 + 强制单引号,需要使用数组
+        "quotes":[2,"single"]
+    }
+}

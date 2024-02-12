@@ -1,0 +1,4 @@
+# ...
+npx --no -- commitlint --edit $1
+# or
+yarn commitlint --edit $1
