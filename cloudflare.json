@@ -45,14 +45,14 @@
       {
         "type": "hysteria2",
         "tag": "proxy",
-        "server": "74.48.12.166",
+        "server": "ipv4",
         "server_port": 443,
         "up_mbps": 20,
         "down_mbps": 85,
-        "password": "CmhqGwlTNoaXjlu52tJ5Vw==",
+        "password": "(CmhqGwlTNoaXjlu52tJ5Vw==)",
         "tls": {
           "enabled": true,
-          "server_name": "gl.citrusgas.top",
+          "server_name": "domain",
           "insecure": false
         }
       },
