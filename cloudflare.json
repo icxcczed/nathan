@@ -1,103 +1,93 @@
 {
-    "dns": {
-      "servers": [
-        {
-          "tag": "cloudflare",
-          "address": "https://1.1.1.1/dns-query"
-        },
-        {
-          "tag": "local",
-          "address": "223.5.5.5",
-          "detour": "direct"
-        },
-        {
-          "tag": "block",
-          "address": "rcode://success"
-        }
-      ],
-      "rules": [
-        {
-          "geosite": "category-ads-all",
-          "server": "block",
-          "disable_cache": true
-        },
-        {
-          "outbound": "any",
-          "server": "local"
-        },
-        {
-          "geosite": "cn",
-          "server": "local"
-        }
-      ],
-      "strategy": "ipv4_only"
-    },
-    "inbounds": [
+  "dns": {
+    "servers": [
       {
-        "type": "tun",
-        "inet4_address": "172.19.0.1/30",
-        "auto_route": true,
-        "strict_route": false,
-        "sniff": true
+        "tag": "google",
+        "address": "tls://8.8.8.8"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
       }
     ],
-    "outbounds": [
+    "rules": [
       {
-        "type": "hysteria2",
-        "tag": "proxy",
-        "server": "74.48.12.166",
-        "server_port": 443,
-        "up_mbps": 20,
-        "down_mbps": 90,
-        "password": "/d+fjfcvolKS3AG6/LnNRQ==",
-        "tls": {
-          "enabled": true,
-          "server_name": "gl.citrusgas.top",
-          "insecure": false
-        }
+        "geosite": "category-ads-all",
+        "server": "block",
+        "disable_cache": true
       },
       {
-        "type": "direct",
-        "tag": "direct"
+        "outbound": "any",
+        "server": "local"
       },
       {
-        "type": "block",
-        "tag": "block"
-      },
-      {
-        "type": "dns",
-        "tag": "dns-out"
+        "geosite": "cn",
+        "server": "local"
       }
     ],
-    "route": {
-      "rules": [
-        {
-          "protocol": "dns",
-          "outbound": "dns-out"
-        },
-        {
-          "geosite": "cn",
-          "geoip": [
-            "private",
-            "cn"
-          ],
-          "outbound": "direct"
-        },
-        {
-          "geosite": "category-ads-all",
-          "outbound": "block"
-        }
-      ],
-      "auto_detect_interface": true
-    },
-    "experimental":{
-      
-      "clash_api": {
-        "external_controller": "0.0.0.0:9090",  
-        "external_ui": "metacubexd", 
-        "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip", 
-        "external_ui_download_detour": "select",  
-        "default_mode": "rule"
-      }
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": false,
+      "sniff": true
     }
+  ],
+  "outbounds": [
+    {
+      "type": "hysteria2",
+      "tag": "proxy",
+      "server": "74.48.12.166",
+      "server_port": 443,
+      "up_mbps": 20,
+      "down_mbps": 90,
+      "password": "/d+fjfcvolKS3AG6/LnNRQ==",
+      "tls": {
+        "enabled": true,
+        "server_name": "gl.citrusgas.top",
+        "insecure": false
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "geosite": "cn",
+        "geoip": [
+          "private",
+          "cn"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "geosite": "category-ads-all",
+        "outbound": "block"
+      }
+    ],
+    "auto_detect_interface": true
   }
+}
