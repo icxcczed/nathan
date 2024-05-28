@@ -2,7 +2,7 @@
     "dns": {
       "servers": [
         {
-          "tag": "cf",
+          "tag": "cloudflare",
           "address": "https://1.1.1.1/dns-query"
         },
         {
@@ -45,14 +45,14 @@
       {
         "type": "hysteria2",
         "tag": "proxy",
-        "server": "ipv4",
+        "server": "74.48.12.166",
         "server_port": 443,
         "up_mbps": 20,
-        "down_mbps": 85,
-        "password": "(CmhqGwlTNoaXjlu52tJ5Vw==)",
+        "down_mbps": 90,
+        "password": "/d+fjfcvolKS3AG6/LnNRQ==",
         "tls": {
           "enabled": true,
-          "server_name": "domain",
+          "server_name": "gl.citrusgas.top",
           "insecure": false
         }
       },
