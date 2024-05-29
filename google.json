@@ -4,7 +4,7 @@
       {
         "tag": "proxy",
         "address": "udp://8.8.4.4",
-        "detour":"google_direct"
+        "detour": "google_direct"
       },
       {
         "tag": "local",
@@ -18,16 +18,16 @@
     ],
     "rules": [
       {
-        "outbound":"any",
-        "server":"local"
+        "outbound": "any",
+        "server": "local"
       },
       {
-        "clash_mode":"direct",
-        "server":"google_direct"
+        "clash_mode": "direct",
+        "server": "google_direct"
       },
       {
-        "clash_mode":"global",
-        "server":"google_direct"
+        "clash_mode": "global",
+        "server": "google_direct"
       },
       {
         "geosite": "category-ads-all",
@@ -56,8 +56,8 @@
   ],
   "outbounds": [
     {
-      "type":"selector",
-      "tag":"google_direct",
+      "type": "selector",
+      "tag": "google_direct",
       "outbounds": ["hy-client"],
       "default": "hy-client"
     },
@@ -91,12 +91,12 @@
   "route": {
     "rules": [
       {
-        "clash_mode":"direct",
-        "outbound":"google_direct"
+        "clash_mode": "direct",
+        "outbound": "google_direct"
       },
       {
-        "clash_mode":"global",
-        "outbound":"google_direct"
+        "clash_mode": "global",
+        "outbound": "google_direct"
       },
       {
         "protocol": "dns",
@@ -104,10 +104,7 @@
       },
       {
         "geosite": "cn",
-        "geoip": [
-          "private",
-          "cn"
-        ],
+        "geoip": ["private", "cn"],
         "outbound": "direct"
       },
       {
