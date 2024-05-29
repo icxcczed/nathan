@@ -92,7 +92,7 @@
     "rules": [
       {
         "clash_mode":"direct",
-        "outbound":"direct"
+        "outbound":"google_direct"
       },
       {
         "clash_mode":"global",
@@ -115,8 +115,6 @@
         "outbound": "block"
       }
     ],
-    "final": "direct",
-    "find_processes":true,
     "auto_detect_interface": true
   },
   "experimental": {
