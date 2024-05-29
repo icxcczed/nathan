@@ -57,7 +57,9 @@
   "outbounds": [
     {
       "type":"selector",
-      "tag":"google_direct"
+      "tag":"google_direct",
+      "outbounds": ["proxy"],
+      "default": "proxy"
     },
     {
       "type": "hysteria2",
