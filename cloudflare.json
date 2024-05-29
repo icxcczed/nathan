@@ -2,9 +2,9 @@
   "dns": {
     "servers": [
       {
-        "tag": "cloudflare",
-        "address": "https://1.1.1.1/dns-query",
-        "detour":"selected"
+        "tag": "proxy",
+        "address": "udp://8.8.4.4",
+        "detour":"google_direct"
       },
       {
         "tag": "local",
@@ -17,6 +17,18 @@
       }
     ],
     "rules": [
+      {
+        "outbound":"any",
+        "server":"local"
+      },
+      {
+        "clash_mode":"direct",
+        "server":"google_direct"
+      },
+      {
+        "clash_mode":"global",
+        "server":"google_direct"
+      },
       {
         "geosite": "category-ads-all",
         "server": "block",
@@ -43,6 +55,10 @@
     }
   ],
   "outbounds": [
+    {
+      "type":"selector",
+      "tag":"google_direct"
+    },
     {
       "type": "hysteria2",
       "tag": "proxy",
@@ -73,6 +89,14 @@
   "route": {
     "rules": [
       {
+        "clash_mode":"direct",
+        "outbound":"direct"
+      },
+      {
+        "clash_mode":"global",
+        "outbound":"google_direct"
+      },
+      {
         "protocol": "dns",
         "outbound": "dns-out"
       },
@@ -89,6 +113,8 @@
         "outbound": "block"
       }
     ],
+    "final": "direct",
+    "find_processes":true,
     "auto_detect_interface": true
   },
   "experimental": {
@@ -99,7 +125,7 @@
       "external_controller": "0.0.0.0:9090",
       "external_ui": "metacubexd",
       "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "selected",
+      "external_ui_download_detour": "google_direct",
       "default_mode": "rule"
     }
   }
