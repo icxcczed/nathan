@@ -3,7 +3,8 @@
     "servers": [
       {
         "tag": "cloudflare",
-        "address": "https://1.1.1.1/dns-query"
+        "address": "https://1.1.1.1/dns-query",
+        "detour":"selected"
       },
       {
         "tag": "local",
@@ -98,7 +99,7 @@
       "external_controller": "0.0.0.0:9090",
       "external_ui": "metacubexd",
       "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "select",
+      "external_ui_download_detour": "selected",
       "default_mode": "rule"
     }
   }
