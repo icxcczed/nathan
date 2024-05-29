@@ -58,12 +58,12 @@
     {
       "type":"selector",
       "tag":"google_direct",
-      "outbounds": ["proxy"],
-      "default": "proxy"
+      "outbounds": ["hy-client"],
+      "default": "hy-client"
     },
     {
       "type": "hysteria2",
-      "tag": "proxy",
+      "tag": "hy-client",
       "server": "74.48.12.166",
       "server_port": 443,
       "up_mbps": 20,
