@@ -64,14 +64,14 @@
     {
       "type": "hysteria2",
       "tag": "hy-client",
-      "server": "74.48.12.166",
+      "server": "ipv4",
       "server_port": 443,
       "up_mbps": 20,
       "down_mbps": 90,
-      "password": "/d+fjfcvolKS3AG6/LnNRQ==",
+      "password": "password",
       "tls": {
         "enabled": true,
-        "server_name": "gl.citrusgas.top",
+        "server_name": "domain",
         "insecure": false
       }
     },
