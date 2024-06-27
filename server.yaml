@@ -1,0 +1,23 @@
+listen: :8443
+
+tls: 
+  cert: some.crt
+  key: some.key
+
+auth:
+  type: password
+  password: password
+
+resolver:
+  type: tls
+  tls:
+    addr: 1.1.1.1:853 
+    timeout: 10s
+    sni: cloudflare-dns.com 
+    insecure: false 
+
+acl:
+  inline:
+    - reject(geoip:il)
+    - reject(geoip:facebook)
+    - reject(geosite:category-ads-all)

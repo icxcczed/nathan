@@ -2,14 +2,16 @@
   "dns": {
     "servers": [
       {
-        "tag": "proxy",
-        "address": "udp://8.8.4.4",
-        "detour": "google_direct"
+        "tag": "dns_direct",
+        "address": "https://1.12.12.12/dns-query",
+        "strategy": "ipv4_only",
+        "detour": "direct"
       },
       {
-        "tag": "local",
-        "address": "223.5.5.5",
-        "detour": "direct"
+        "tag": "google",
+        "address": "udp://8.8.4.4",
+        "strategy": "ipv4_only",
+        "detour": "select"
       },
       {
         "tag": "block",
@@ -18,61 +20,93 @@
     ],
     "rules": [
       {
-        "outbound": "any",
-        "server": "local"
+        "outbound":[
+          "any"
+        ],
+        "server":"dns_direct"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "server": "dns_direct"
       },
       {
         "clash_mode": "direct",
-        "server": "google_direct"
+        "server": "dns_direct"
       },
       {
         "clash_mode": "global",
-        "server": "google_direct"
-      },
-      {
-        "geosite": "category-ads-all",
-        "server": "block",
-        "disable_cache": true
-      },
-      {
-        "outbound": "any",
-        "server": "local"
-      },
-      {
-        "geosite": "cn",
-        "server": "local"
+        "server": "google"
       }
     ],
-    "strategy": "ipv4_only"
+    "final":"google",
+    "strategy": "",
+    "disable_cache": false,
+    "disable_expire": false
   },
   "inbounds": [
     {
       "type": "tun",
-      "inet4_address": "172.19.0.1/30",
+      "tag":"tun-in",
+      "interface_name": "tun0",
+      "address": [
+        "172.19.0.1/30"
+      ],
       "auto_route": true,
       "strict_route": false,
-      "sniff": true
+      "sniff": true,
+      "sniff_override_destination": false,
+      "sniff_timeout": "300ms",
+      "udp_timeout": 300
     }
   ],
   "outbounds": [
     {
       "type": "selector",
-      "tag": "google_direct",
-      "outbounds": ["hy-client"],
-      "default": "hy-client"
+      "tag": "select",
+      "outbounds": [
+        "hy2-out",
+        "vless-out"
+      ],
+      "default": "hy2-out"
     },
     {
       "type": "hysteria2",
-      "tag": "hy-client",
+      "tag": "hy2-out",
       "server": "ipv4",
-      "server_port": 443,
+      "server_port": "port",
       "up_mbps": 20,
-      "down_mbps": 90,
+      "down_mbps": 110,
       "password": "password",
       "tls": {
         "enabled": true,
-        "server_name": "domain",
+        "server_name": "域名",
         "insecure": false
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "vless-out",
+      "server": "ipv4",
+      "server_port": 443,
+      "uuid": "uuid",
+      "flow": "",
+      "tls": {
+        "enabled": true, 
+        "server_name": "域名",
+        "insecure":false,
+        "utls":{
+          "enabled":true,
+          "fingerprint": "chrome"
+        }
+      },
+      "packet_encoding": "",
+      "multiplex": {},
+      "transport": {
+        "type": "ws",
+        "path": "/miumiu",
+        "headers": {},
+        "max_early_data": 0,
+        "early_data_header_name": ""
       }
     },
     {
@@ -91,39 +125,94 @@
   "route": {
     "rules": [
       {
-        "clash_mode": "direct",
-        "outbound": "google_direct"
-      },
-      {
-        "clash_mode": "global",
-        "outbound": "google_direct"
-      },
-      {
         "protocol": "dns",
         "outbound": "dns-out"
       },
       {
-        "geosite": "cn",
-        "geoip": ["private", "cn"],
+        "rule_set":[
+          "geoip-cn",
+          "geosite-cn",
+          "geosite-private"
+        ],
+        "outbound":"direct"
+      },
+      {
+        "rule_set":[
+          "geosite-pixiv",
+          "geosite-telegram",
+          "geosite-youtube"
+        ],
+        "outbound":"select"
+      },
+      {
+        "clash_mode": "direct",
         "outbound": "direct"
       },
       {
-        "geosite": "category-ads-all",
-        "outbound": "block"
+        "clash_mode": "global",
+        "outbound": "select"
       }
     ],
+    "rule_set": [
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "select"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "select"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-private",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs",
+        "download_detour": "select"
+      },
+      {
+        "type":"remote",
+        "tag":"geosite-pixiv",
+        "format":"binary",
+        "url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-pixiv.srs",
+        "download_detour":"select"
+      },
+      {
+        "type":"remote",
+        "tag":"geosite-telegram",
+        "format":"binary",
+        "url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-telegram.srs",
+        "download_detour":"select"
+      },
+      {
+        "type":"remote",
+        "tag":"geosite-youtube",
+        "format":"binary",
+        "url":"https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-youtube.srs",
+        "download_detour":"select"
+      }
+    ],
+    "final":"select",
     "auto_detect_interface": true
   },
   "experimental": {
     "cache_file": {
-      "enabled": true
+      "enabled": true,
+      "path": "cache.db",
+      "cache_id": "mycache",
+      "store_fakeip": true
     },
     "clash_api": {
-      "external_controller": "0.0.0.0:9090",
+      "external_controller": "127.0.0.1:9090",
       "external_ui": "metacubexd",
       "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "google_direct",
-      "default_mode": "rule"
+      "external_ui_download_detour": "select",
+      "default_mode": ""
     }
   }
 }
