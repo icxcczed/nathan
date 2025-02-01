@@ -153,7 +153,7 @@ proxies:
   down: "200 Mbps"
   sni: le.citrusgas.top
   skip-cert-verify: false
-- name: 🇮🇱 IL
+- name: 🇮🇪 IE
   type: vless
   network: ws
   server: 74.48.12.166
@@ -180,7 +180,7 @@ proxy-groups:
   proxies: &id001
   - 🇦🇺 AU
   - 🇺🇸 USA
-  - 🇮🇱 IL
+  - 🇮🇪 IE
 - name: LOAD-BALANCE
   type: load-balance
   url: https://cp.cloudflare.com/generate_204
@@ -206,6 +206,9 @@ proxy-groups:
 - name: NETFLIX
   type: select
   proxies: *id002
+- name: Telegram
+  type: select
+  proxies: *id002
 - name: BLOCK
   type: select
   proxies:
@@ -217,8 +220,8 @@ proxy-groups:
   - PROXY
   - DIRECT
 rules:
-- RULE-SET,proxy-classical,PROXY
-- RULE-SET,direct-classical,DIRECT
+- RULE-SET,proxy,PROXY
+- RULE-SET,direct,DIRECT
 - RULE-SET,block,BLOCK
 - RULE-SET,applications,DIRECT
 - RULE-SET,icloud,DIRECT
@@ -237,99 +240,99 @@ rules:
 rule-providers:
   icloud:
     type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/icloud.yaml
-    path: ./rules/classical/icloud.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
     interval: 86400
     proxy: DIRECT
   apple:
     type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/apple.yaml
-    path: ./rules/classical/apple.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
     interval: 86400
     proxy: DIRECT
   gfw:
     type: http
     behavior: domain
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/domain/gfw.yaml
-    path: ./rules/domain/gfw.yaml
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
     interval: 86400
     proxy: DIRECT
   youtube:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/youtube.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/youtube.yaml"
     path: ./rules/classical/youtube.yaml
     interval: 86400
     proxy: DIRECT
   google:
     type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/google.yaml
-    path: ./rules/classical/google.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
     interval: 86400
     proxy: DIRECT
   github:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/github.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/github.yaml"
     path: ./rules/classical/github.yaml
     interval: 86400
     proxy: DIRECT
   openai:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/openai.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/openai.yaml"
     path: ./rules/classical/openai.yaml
     interval: 86400
     proxy: DIRECT
   telegram:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/telegram.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/telegram.yaml"
     path: ./rules/classical/telegram.yaml
     interval: 86400
     proxy: DIRECT
   spotify:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/spotify.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/spotify.yaml"
     path: ./rules/classical/spotify.yaml
     interval: 86400
     proxy: DIRECT
   netflix:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/netflix.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/netflix.yaml"
     path: ./rules/classical/netflix.yaml
     interval: 86400
     proxy: DIRECT
   applications:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/applications.yaml
-    path: ./rules/classical/applications.yaml
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
     interval: 86400
     proxy: DIRECT
   block:
     type: http
     behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/block.yaml
+    url: "https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/block.yaml"
     path: ./rules/classical/block.yaml
     interval: 86400
     proxy: DIRECT
-  direct-classical:
+  direct:
     type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/direct.yaml
-    path: ./rules/classical/direct.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
     interval: 86400
     proxy: DIRECT
-  proxy-classical:
+  proxy:
     type: http
-    behavior: classical
-    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/proxy.yaml
-    path: ./rules/classical/proxy.yaml
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
     interval: 86400
     proxy: DIRECT
