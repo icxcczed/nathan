@@ -13,7 +13,7 @@ geo-update-interval: 3
 geox-url:
   geoip: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
   geosite: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
-  mmdb: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  mmdb: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb
   asn: https://mirror.ghproxy.com/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
 profile:
   store-selected: true
@@ -140,12 +140,12 @@ proxies:
   tls: true
   udp: true
   ws-opts:
-    headers:
-      Host: h2.citrusgas.top
     path: /miumiu
+    headers:
+      Host: h2.citrusgas.top  
 - name: 🇺🇸 USA
   type: hysteria2
-  server: 74.48.12.166
+  server: le.citrusgas.top
   port: 8443
   password: xcHe0/vet5u/cGqMmuTaqA==
   servername: le.citrusgas.top
@@ -156,7 +156,7 @@ proxies:
 - name: 🇮🇪 IE
   type: vless
   network: ws
-  server: 74.48.12.166
+  server: le.citrusgas.top
   port: 11785
   uuid: 1b204bb4-6016-4d7a-9085-89ebe8822c2c
   servername: le.citrusgas.top
@@ -164,9 +164,9 @@ proxies:
   tls: true
   udp: true
   ws-opts:
-    headers:
-      Host: le.citrusgas.top
     path: /loon
+    headers:
+      Host: le.citrusgas.top   
 proxy-groups:
 - name: PROXY
   type: select
