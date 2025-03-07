@@ -1,0 +1,347 @@
+---
+mixed-port: 7890
+tcp-concurrent: false
+allow-lan: true
+ipv6: true
+mode: Rule
+log-level: info
+global-client-fingerprint: chrome
+find-process-mode: strict
+external-controller: 0.0.0.0:9090
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 3
+geox-url:
+  geoip: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb
+  asn: https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
+profile:
+  store-selected: true
+  store-fake-ip: true
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  sniff:
+    HTTP:
+      ports:
+        - 80
+        - 8080-8800
+      override-destination: true
+    TLS:
+      ports:
+        - 443
+        - 8443
+    QUIC:
+      ports:
+        - 443
+        - 8443
+  skip-domain:
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - +.apple.com
+tun:
+  enable: false
+  stack: mixed
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+dns:
+  enable: true
+  ipv6: true
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - cable.auth.com
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - network-test.debian.org
+    - detectportal.firefox.com
+    - resolver1.opendns.com
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - +.xboxlive.com
+    - stun.*
+    - global.turn.twilio.com
+    - global.stun.twilio.com
+    - localhost.*.qq.com
+    - +.logon.battlenet.com.cn
+    - +.logon.battle.net
+    - +.blzstatic.cn
+    - +.cmpassport.com
+    - id6.me
+    - open.e.189.cn
+    - mdn.open.wo.cn
+    - opencloud.wostore.cn
+    - auth.wosms.cn
+    - +.jegotrip.com.cn
+    - +.icitymobile.mobi
+    - +.pingan.com.cn
+    - +.cmbchina.com
+    - +.cmbchina.com.cn
+    - pool.ntp.org
+    - +.pool.ntp.org
+    - ntp.*.com
+    - time.*.com
+    - ntp?.*.com
+    - time?.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - +.ntp.org.cn
+    - time.*.apple.com
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver-policy:
+    www.baidu.com: 114.114.114.114
+    +.internal.crop.com: 10.0.0.1
+    "www.baidu.com,+.google.cn": https://doh.pub/dns-query
+    "geosite:private,apple": https://dns.alidns.com/dns-query
+    rule-set:google: 8.8.8.8
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://1.1.1.2/dns-query
+    - https://1.0.0.2/dns-query
+    - https://208.67.222.222/dns-query
+    - https://208.67.220.220/dns-query
+    - https://9.9.9.9/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+      - gfw
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+    domain:
+      - +.google.com
+      - +.github.com
+      - +.facebook.com
+      - +.twitter.com
+      - +.youtube.com
+      - +.google.cn
+      - +.googleapis.cn
+      - +.googleapis.com
+proxies:
+  - name: 🇦🇺 AU
+    type: vless
+    network: ws
+    server: 148.135.15.223
+    port: 443
+    uuid: e3a02640-2ccd-44f1-b671-0c0f2b340beb
+    servername: h2.citrusgas.top
+    skip-cert-verify: false
+    tls: true
+    ws-opts:
+      path: /miumiu
+      headers:
+        Host: h2.citrusgas.top
+  - name: 🇮🇪 IE
+    type: vless
+    network: ws
+    server: 74.48.12.166
+    port: 11785
+    uuid: 1b204bb4-6016-4d7a-9085-89ebe8822c2c
+    servername: le.citrusgas.top
+    skip-cert-verify: false
+    tls: true
+    ws-opts:
+      path: /loon
+      headers:
+        Host: le.citrusgas.top
+  - name: 🇺🇸 USA
+    type: hysteria2
+    server: 74.48.12.166
+    port: 8443
+    password: xcHe0/vet5u/cGqMmuTaqA==
+    servername: le.citrusgas.top
+    up: "30 Mbps"
+    down: "200 Mbps"
+    sni: le.citrusgas.top
+    skip-cert-verify: false
+proxy-groups:
+  - name: PROXY
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg
+    proxies:
+      - LOAD-BALANCE
+      - SELECT
+      - FALLBACK
+      - DIRECT
+  - name: SELECT
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg
+    proxies:
+      &a1
+      - 🇦🇺 AU
+      - 🇮🇪 IE
+      - 🇺🇸 USA
+  - name: LOAD-BALANCE
+    type: load-balance
+    url: https://cp.cloudflare.com/generate_204
+    interval: 3600
+    strategy: consistent-hashing
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/merry_go.svg
+    proxies: *a1
+  - name: FALLBACK
+    type: fallback
+    url: https://cp.cloudflare.com/generate_204
+    interval: 3600
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/ambulance.svg
+    proxies: *a1
+  - name: GITHUB
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/github.svg
+    proxies:
+      &a2
+      - PROXY
+      - LOAD-BALANCE
+      - SELECT
+      - FALLBACK
+      - DIRECT
+  - name: OPENAI
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg
+    proxies: *a2
+  - name: NETFLIX
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/netflix.svg
+    proxies: *a2
+  - name: BLOCK
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/block.svg
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: FINAL
+    type: select
+    icon: https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg
+    proxies:
+      - PROXY
+      - DIRECT
+      - GITHUB
+      - OPENAI
+rules:
+  - RULE-SET,proxy-classical,PROXY
+  - RULE-SET,direct-classical,DIRECT
+  - RULE-SET,block,BLOCK
+  - RULE-SET,applications,DIRECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,github,GITHUB
+  - RULE-SET,openai,OPENAI
+  - RULE-SET,netflix,NETFLIX
+  - RULE-SET,google,PROXY
+  - RULE-SET,youtube,PROXY
+  - RULE-SET,telegram,PROXY
+  - RULE-SET,spotify,PROXY
+  - RULE-SET,gfw,PROXY
+  - GEOIP,LAN,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT
+  - MATCH,FINAL
+rule-providers:
+  icloud:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/icloud.yaml
+    path: ./rules/classical/icloud.yaml
+    interval: 86400
+    proxy: DIRECT
+  apple:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/apple.yaml
+    path: ./rules/classical/apple.yaml
+    interval: 86400
+    proxy: DIRECT
+  gfw:
+    type: http
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/domain/gfw.yaml
+    path: ./rules/domain/gfw.yaml
+    interval: 86400
+    proxy: DIRECT
+  youtube:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/youtube.yaml
+    path: ./rules/classical/youtube.yaml
+    interval: 86400
+    proxy: DIRECT
+  google:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/google.yaml
+    path: ./rules/classical/google.yaml
+    interval: 86400
+    proxy: DIRECT
+  github:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/github.yaml
+    path: ./rules/classical/github.yaml
+    interval: 86400
+    proxy: DIRECT
+  openai:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/openai.yaml
+    path: ./rules/classical/openai.yaml
+    interval: 86400
+    proxy: DIRECT
+  telegram:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/telegram.yaml
+    path: ./rules/classical/telegram.yaml
+    interval: 86400
+    proxy: DIRECT
+  spotify:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/spotify.yaml
+    path: ./rules/classical/spotify.yaml
+    interval: 86400
+    proxy: DIRECT
+  netflix:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/netflix.yaml
+    path: ./rules/classical/netflix.yaml
+    interval: 86400
+    proxy: DIRECT
+  applications:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/applications.yaml
+    path: ./rules/classical/applications.yaml
+    interval: 86400
+    proxy: DIRECT
+  block:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/block.yaml
+    path: ./rules/classical/block.yaml
+    interval: 86400
+    proxy: DIRECT
+  direct-classical:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/direct.yaml
+    path: ./rules/classical/direct.yaml
+    interval: 86400
+    proxy: DIRECT
+  proxy-classical:
+    type: http
+    behavior: classical
+    url: https://cdn.jsdelivr.net/gh/anaer/Sub@main/rules/classical/proxy.yaml
+    path: ./rules/classical/proxy.yaml
+    interval: 86400
+    proxy: DIRECT
