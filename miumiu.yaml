@@ -170,6 +170,7 @@ proxies:
 proxy-groups:
 - name: PROXY
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
   proxies:
   - LOAD-BALANCE
   - SELECT
@@ -177,6 +178,7 @@ proxy-groups:
   - DIRECT
 - name: SELECT
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
   proxies: &a1
   - 🇦🇺 AU
   - 🇺🇸 USA
@@ -184,16 +186,19 @@ proxy-groups:
 - name: LOAD-BALANCE
   type: load-balance
   url: https://cp.cloudflare.com/generate_204
-  interval: 3600
   strategy: consistent-hashing
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Quantumult_X.png
   proxies: *a1
+  interval: 3600
 - name: FALLBACK
   type: fallback
   url: https://cp.cloudflare.com/generate_204
-  interval: 3600
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Back.png
   proxies: *a1
+  interval: 3600
 - name: GITHUB
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
   proxies: &a2
   - PROXY
   - LOAD-BALANCE
@@ -202,20 +207,25 @@ proxy-groups:
   - DIRECT
 - name: OPENAI
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
   proxies: *a2
 - name: NETFLIX
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
   proxies: *a2
 - name: Telegram
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
   proxies: *a2
 - name: BLOCK
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png
   proxies:
   - REJECT
   - DIRECT
 - name: FINAL
   type: select
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
   proxies:
   - PROXY
   - DIRECT
