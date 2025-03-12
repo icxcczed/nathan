@@ -189,7 +189,7 @@ proxy-groups:
     type: load-balance
     url: https://cp.cloudflare.com/generate_204
     strategy: consistent-hashing
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Quantumult_X.png
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
     proxies: *a1
     interval: 3600
   - name: FALLBACK
