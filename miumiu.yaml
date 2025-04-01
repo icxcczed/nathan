@@ -145,23 +145,9 @@ proxies:
       headers:
         Host: h2.citrusgas.top
   - name: 🇮🇪 IE
-    type: vless
-    network: ws
-    server: le.citrusgas.top
-    port: 11785
-    uuid: 1b204bb4-6016-4d7a-9085-89ebe8822c2c
-    servername: le.citrusgas.top
-    skip-cert-verify: false
-    tls: true
-    udp: true
-    ws-opts:
-      path: /loon
-      headers:
-        Host: le.citrusgas.top
-  - name: 🇺🇸 USA
     type: hysteria2
     server: le.citrusgas.top
-    port: 8443
+    port: 8125
     password: xcHe0/vet5u/cGqMmuTaqA==
     servername: le.citrusgas.top
     up: 30 Mbps
@@ -183,7 +169,6 @@ proxy-groups:
     proxies:
       &a1
       - 🇦🇺 AU
-      - 🇺🇸 USA
       - 🇮🇪 IE
   - name: LOAD-BALANCE
     type: load-balance
