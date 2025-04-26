@@ -1,16 +1,17 @@
 # nathan
+
 git init
 
 git add README.md
 
 git commit -m"首次提交"
 
-git remote add origin https://github.com/icxcczed/nathan.git
+git remote add origin "<https://github.com/icxcczed/nathan.git>"
 
-git push -u origin master 
+git push -u origin master
 
+## git
 
-# git
 - 克隆代码
 
   git clone 仓库地址
@@ -89,4 +90,3 @@ git push -u origin master
 ```
 
 - git stash
-
