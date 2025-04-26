@@ -147,7 +147,7 @@ proxies:
   - name: 🇮🇪 IE
     type: hysteria2
     server: le.citrusgas.top
-    port: 8125
+    port: 8080
     password: xcHe0/vet5u/cGqMmuTaqA==
     servername: le.citrusgas.top
     up: 30 Mbps
