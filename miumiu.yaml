@@ -162,7 +162,6 @@ proxy-groups:
     proxies:
       - LOAD-BALANCE
       - SELECT
-      - FALLBACK
       - DIRECT
   - name: SELECT
     type: select
