@@ -147,7 +147,7 @@ proxies:
         Host: h2.citrusgas.top
   - name: 🇮🇪 IE
     type: hysteria2
-    server: le.citrusgas.top
+    server: 148.135.15.223
     port: 2052
     password: 1KgEEU7onS8J6J6eINmj8A==
     servername: le.citrusgas.top
