@@ -178,40 +178,15 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
     proxies: *a1
     interval: 3600
-  - name: FALLBACK
-    type: fallback
-    url: https://cp.cloudflare.com/generate_204
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Back.png
-    proxies: *a1
-    interval: 3600
   - name: GITHUB
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
     proxies:
-      &a2
-      - PROXY
-      - LOAD-BALANCE
-      - SELECT
-      - FALLBACK
-      - DIRECT
-  - name: OPENAI
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
-    proxies: *a2
-  - name: NETFLIX
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
-    proxies: *a2
+      *a1
   - name: Telegram
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies: *a2
-  - name: BLOCK
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Reject.png
-    proxies:
-      - REJECT
-      - DIRECT
+    proxies: *a1
   - name: FINAL
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
